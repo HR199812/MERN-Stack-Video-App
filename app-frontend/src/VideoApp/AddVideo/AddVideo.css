@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.AddVideoContainer {
+    background-image: url('AddVideoBackImg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 92.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AddVideoForm {
+    background-color: white;
+    opacity: 0.9;
+    height: 72vh;
+    width: 22rem;
+    border-radius: 30px;
+    padding: 0rem 2rem;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.AddVideoForm div{
+    margin: 5px;
+    padding: 10px;
+}
+.AddVideoForm div p{
+    margin-top: 10px;
+    font-size: larger;
+    font-weight: bolder;
+}
+.AddVideoForm div input{
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: larger;
+    font-weight: bolder;
+    width: 20rem;
+    border: 2px solid black;
+    outline: none;
+}
