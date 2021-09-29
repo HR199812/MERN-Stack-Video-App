@@ -17,8 +17,8 @@
 
 .AddVideoForm {
     background-color: white;
-    opacity: 0.9;
-    height: 72vh;
+    opacity: 0.92;
+    height: 78vh;
     width: 22rem;
     border-radius: 30px;
     padding: 0rem 2rem;
@@ -43,4 +43,25 @@
     width: 20rem;
     border: 2px solid black;
     outline: none;
+}
+
+.AddVideoForm button{
+    left: 0;
+    right: 0;
+    width: 40%;
+    border: none;
+    cursor: pointer;
+    font-size: x-large;
+    font-weight: bolder;
+    border-radius: 10px;
+    background-color: #25d167;  
+}
+.AddVideoForm button:hover{
+    background-color: rgb(40, 194, 122); 
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
+}
+.AddVideoForm .ButtonDiv{
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }

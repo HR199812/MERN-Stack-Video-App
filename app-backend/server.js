@@ -1,16 +1,14 @@
-const cors = require('cors');
-const { application } = require('express');
-const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const express = require('express');
 
-const app = express()
-const port = process.env.PORT || 5000;
+require('dotenv').config();
 
-app.use(cors);
+const app = express();
+const port = process.env.PORT || 5001;
+
+app.use(cors());
 app.use(express.json());
-
-const videos = require('./video');
-app.use('/videos', videos);
 
 /* Connection to MongoDB Compass */
 mongoose.connect('mongodb://localhost:27017/VideoApp',
@@ -19,6 +17,11 @@ mongoose.connect('mongodb://localhost:27017/VideoApp',
     }).catch((error) => {
         console.log(error);
     });
+
+
+const videosRouter = require('./video');
+app.use('/videos', videosRouter);
+
 
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);

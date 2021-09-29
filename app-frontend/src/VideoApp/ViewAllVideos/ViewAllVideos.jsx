@@ -1,8 +1,11 @@
-import react from 'react';
+import { useState } from 'react';
 import NavBar from '../NavBar/NavBar';
 import './ViewAllVideos.css';
+import axios from 'axios';
 
 function ViewAllVideos() {
+    const [videosArr, SetVideosArr] = useState({});
+    const [videosArrCopy, SetVideosArrCopy] = useState({});
     return (
         <div>
             <NavBar />
