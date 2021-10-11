@@ -18,7 +18,7 @@
 .AddVideoForm {
     background-color: white;
     opacity: 0.92;
-    height: 78vh;
+    height: 82vh;
     width: 22rem;
     border-radius: 30px;
     padding: 0rem 2rem;
@@ -41,6 +41,17 @@
     font-size: larger;
     font-weight: bolder;
     width: 20rem;
+    border: 2px solid black;
+    outline: none;
+}
+.AddVideoForm div textarea{
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: larger;
+    font-weight: bolder;
+    max-width: 20rem;
+    max-height: 4rem;
     border: 2px solid black;
     outline: none;
 }

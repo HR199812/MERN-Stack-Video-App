@@ -4,27 +4,27 @@ const schema = mongoose.Schema;
 
 
 const videosSchema = new schema({
-    MovieName: {
+    VideoName: {
         type: String,
         required: true,
         trim: true,
     },
-    MovieReleaseDate: {
+    VideoReleaseDate: {
         type: Date,
         required: true,
         trim: true,
     },
-    MovieLanguage: {
+    VideoLanguage: {
         type: String,
         required: true,
         trim: true,
     },
-    MovieThumbnail: {
+    VideoSource: {
         type: String,
         required: true,
         trim: true,
     },
-    MovieVideo: {
+    VideoVideoURL: {
         type: String,
         required: true,
         trim: true,

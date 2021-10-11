@@ -2,19 +2,20 @@ import { useState } from 'react';
 import './AddVideo.css';
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 function AddVideo() {
 
 
-    const [thumbNail, setThumbNail] = useState();
-    const [video, setVideo] = useState();
-
     const [fieldValue, setFieldValue] = useState({
-        movieName: '',
-        movieReleaseData: '',
-        movieLanguage: '',
-        movieThumbNail: '',
-        movieVideo: ''
+        videoName: '',
+        videoReleaseData: '',
+        videoLanguage: '',
+        videoThumbNail: '',
+        videoVideo: '',
+        videoSource: ''
     });
 
     const ChangeEvent = (e) => {
@@ -22,12 +23,6 @@ function AddVideo() {
         let value = e.target.value;
         let name = e.target.name;
 
-        if (name === 'movieThumbNail') {
-            setThumbNail(e.target.files[0]);
-        }
-        if (name === 'movieVideo') {
-            setVideo(e.target.files[0]);
-        }
         setFieldValue((preValue) => {
             return {
                 ...preValue,
@@ -40,45 +35,29 @@ function AddVideo() {
 
         e.preventDefault();
 
-        const formData = new FormData();
-
-        formData.append("MovieName", fieldValue.movieName);
-        formData.append("MovieReleaseData", fieldValue.movieReleaseData);
-        formData.append("MovieLanguage", fieldValue.movieLanguage);
-        formData.append("MovieThumbNail", fieldValue.movieThumbNail.split('\\').pop().split(' ').join('_'));
-        formData.append("MovieVideoFile", fieldValue.movieVideo.split('\\').pop().split(' ').join('_'));
-        formData.append("file", thumbNail);
-        formData.append("file", video);
 
         const videoData = {
-            MovieName: fieldValue.movieName,
-            MovieReleaseData: fieldValue.movieReleaseData,
-            MovieLanguage: fieldValue.movieLanguage,
-            MovieThumbNail: fieldValue.movieThumbNail,
-            MovieVideoFile: fieldValue.movieVideo
+            videoName: fieldValue.videoName,
+            videoReleaseData: fieldValue.videoReleaseData,
+            videoLanguage: fieldValue.videoLanguage,
+            videoSource: fieldValue.videoSource,
+            videoVideoURL: fieldValue.videoVideoURL
         }
 
 
-        for(var par of formData.entries()){
-            console.log(par);
+        try {
+            axios.post('http://localhost:5001/videos/add', videoData)
+                .then(res => {
+                    toast.success(res, { position: toast.POSITION.BOTTOM_RIGHT });
+                })
+                .catch(err => {
+                    toast.error(err, { position: toast.POSITION.BOTTOM_RIGHT });
+                });
+        }
+        catch (error) {
+
         }
 
-        try{
-            axios.post('http://localhost:5001/videos/add', formData)
-                .then(res => console.log(res))
-                .catch(err => console.log(err));
-        }
-        catch(error){
-
-        }
-
-        // axios({
-        //     method: 'post',
-        //     url: 'http://localhost:5001/videos/add',
-        //     data: formData
-        // }).then(res => console.log(res))
-        //     .catch(err => console.log(err));
-        // console.log(fieldValue);
     }
     return (
         <div>
@@ -86,24 +65,24 @@ function AddVideo() {
             <div className='AddVideoContainer'>
                 <div className='AddVideoForm'>
                     <div>
-                        <p>Movie Name:</p>
-                        <input value={fieldValue.movieName} name="movieName" type="text" placeholder="movie name" onChange={ChangeEvent} />
+                        <p>Trailer Name:</p>
+                        <input value={fieldValue.videoName} name="videoName" type="text" placeholder="video name" onChange={ChangeEvent} />
                     </div>
                     <div>
                         <p>Year of Release:</p>
-                        <input type="date" value={fieldValue.movieReleaseData} name="movieReleaseData" onChange={ChangeEvent} />
+                        <input type="date" value={fieldValue.videoReleaseData} name="videoReleaseData" onChange={ChangeEvent} />
                     </div>
                     <div>
                         <p>Language:</p>
-                        <input type="text" placeholder="movie language" value={fieldValue.movieLanguage} name="movieLanguage" onChange={ChangeEvent} />
+                        <input type="text" placeholder="video language" value={fieldValue.videoLanguage} name="videoLanguage" onChange={ChangeEvent} />
                     </div>
                     <div>
-                        <p>Upload Thumbnail:</p>
-                        <input type="file" value={fieldValue.movieThumbNail} name="movieThumbNail" onChange={ChangeEvent} />
+                        <p>Source:</p>
+                        <input type="text" placeholder="video source" value={fieldValue.videoSource} name="videoSource" onChange={ChangeEvent} />
                     </div>
                     <div>
-                        <p>Upload Video fIle:</p>
-                        <input type="file" value={fieldValue.movieVideo} name="movieVideo" onChange={ChangeEvent} />
+                        <p>Add Trailer URL:</p>
+                        <textarea value={fieldValue.videoVideoURL} name="videoVideoURL" onChange={ChangeEvent} />
                     </div>
                     <div className='ButtonDiv'>
                         <button onClick={AddVideo}>Add</button>

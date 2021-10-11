@@ -4,24 +4,26 @@ const fs = require('fs');
 
 
 router.get('/', (req, res) => {
-    res.json('hi');
+    try{
+        Video.find().then(videos => res.json(videos)).catch(err => res.json(err));
+    }catch(err){
+
+    }
 });
 
 router.post('/add', (req, res) => {
 
-    console.log('hi');
     console.log(req.body);
-    res.json(req.body);
-    // let movie = new Video({
-    //     "MovieName": req.body.movieName,
-    //     "MovieReleaseDate": req.body.movieReleaseData,
-    //     "MovieLanguage": req.body.movieLanguage,
-    //     "MovieThumbnail": req.body.movieThumbNail,
-    //     "MovieVideo": req.body.movieVideo
-    // });
+    let video = new Video({
+        "VideoName": req.body.videoName,
+        "VideoReleaseDate": req.body.videoReleaseData,
+        "VideoLanguage": req.body.videoLanguage,
+        "VideoSource": req.body.videoSource,
+        "VideoVideoURL": req.body.videoVideoURL
+    });
 
-    // movie.save().then(movie => res.status(200).json('Movie Added Successfully'))
-    //     .catch(err => res.status(400).send(err));
+    video.save().then(video => res.status(200).json('Video Added Successfully'))
+        .catch(err => res.status(400).send(err));
 });
 
 module.exports = router;
