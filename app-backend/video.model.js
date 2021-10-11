@@ -10,7 +10,7 @@ const videosSchema = new schema({
         trim: true,
     },
     MovieReleaseDate: {
-        type: String,
+        type: Date,
         required: true,
         trim: true,
     },

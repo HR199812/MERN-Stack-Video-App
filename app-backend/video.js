@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Video = require('./video.model');
+const fs = require('fs');
 
 
 router.get('/', (req, res) => {
@@ -8,8 +9,9 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
 
+    console.log('hi');
     console.log(req.body);
-    console.log(req.files);
+    res.json(req.body);
     // let movie = new Video({
     //     "MovieName": req.body.movieName,
     //     "MovieReleaseDate": req.body.movieReleaseData,

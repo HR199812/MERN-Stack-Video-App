@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const cors = require('cors');
 const express = require('express');
+const multer = require('multer');
 
 require('dotenv').config();
 
@@ -9,9 +10,10 @@ const port = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 /* Connection to MongoDB Compass */
-mongoose.connect('mongodb://localhost:27017/VideoApp',
+mongoose.connect(process.env.MONGODB_URI,
     { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
         console.log('Connection to Compass is successful');
     }).catch((error) => {

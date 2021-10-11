@@ -8,6 +8,7 @@ function AddVideo() {
 
     const [thumbNail, setThumbNail] = useState();
     const [video, setVideo] = useState();
+
     const [fieldValue, setFieldValue] = useState({
         movieName: '',
         movieReleaseData: '',
@@ -35,17 +36,19 @@ function AddVideo() {
         });
     }
 
-    const AddVideo = async () => {
+    const AddVideo = (e) => {
+
+        e.preventDefault();
 
         const formData = new FormData();
 
-        formData.append('MovieName', fieldValue.movieName);
-        formData.append('MovieReleaseData', fieldValue.movieReleaseData);
-        formData.append('MovieLanguage', fieldValue.movieLanguage);
-        formData.append('MovieThumbNail', fieldValue.movieThumbNail);
-        formData.append('MovieVideoFile', fieldValue.movieVideo);
-        formData.append('file', thumbNail);
-        formData.append('file', video);
+        formData.append("MovieName", fieldValue.movieName);
+        formData.append("MovieReleaseData", fieldValue.movieReleaseData);
+        formData.append("MovieLanguage", fieldValue.movieLanguage);
+        formData.append("MovieThumbNail", fieldValue.movieThumbNail.split('\\').pop().split(' ').join('_'));
+        formData.append("MovieVideoFile", fieldValue.movieVideo.split('\\').pop().split(' ').join('_'));
+        formData.append("file", thumbNail);
+        formData.append("file", video);
 
         const videoData = {
             MovieName: fieldValue.movieName,
@@ -56,9 +59,25 @@ function AddVideo() {
         }
 
 
-        await axios.post('http://localhost:5001/videos/add', formData)
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+        for(var par of formData.entries()){
+            console.log(par);
+        }
+
+        try{
+            axios.post('http://localhost:5001/videos/add', formData)
+                .then(res => console.log(res))
+                .catch(err => console.log(err));
+        }
+        catch(error){
+
+        }
+
+        // axios({
+        //     method: 'post',
+        //     url: 'http://localhost:5001/videos/add',
+        //     data: formData
+        // }).then(res => console.log(res))
+        //     .catch(err => console.log(err));
         // console.log(fieldValue);
     }
     return (
