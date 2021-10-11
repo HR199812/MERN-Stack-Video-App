@@ -48,7 +48,8 @@ function AddVideo() {
         try {
             axios.post('http://localhost:5001/videos/add', videoData)
                 .then(res => {
-                    toast.success(res, { position: toast.POSITION.BOTTOM_RIGHT });
+                    console.log(res);
+                    toast.success(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
                 })
                 .catch(err => {
                     toast.error(err, { position: toast.POSITION.BOTTOM_RIGHT });
