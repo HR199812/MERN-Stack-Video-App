@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import NavBar from '../NavBar/NavBar';
 import './ViewAllVideos.css';
 import axios from 'axios';
+import moment from 'moment';
 
 function ViewAllVideos() {
-    const [videosArr, SetVideosArr] = useState({});
+    const [videosArr, SetVideosArr] = useState([]);
 
-    const loadDataFromAPI = async() =>{
+    const loadDataFromAPI = async () => {
         try {
             const videosData = await axios.get('http://localhost:5001/videos');
             console.log(videosData.data);
@@ -28,19 +29,22 @@ function ViewAllVideos() {
             <NavBar />
             <div className='ViewAllVideosContainer'>
                 <div className='CardsContainer'>
-                    {/* {
+                    {
 
                         videosArr.map((video, index) => {
                             return (
                                 <div className='Card'>
-                                    <h3>{video.videoName}</h3>
-                                    <p>{video.videoLanguage}</p>
-                                    <p>{video.videoReleaseDate}</p>
-                                    <p>{video.videoSource}</p>
+                                    <video controls >
+                                        <source src={video.VideoVideoURL} />
+                                    </video>
+                                    <h4>{video.VideoName}</h4><br />
+                                    <h5>{video.VideoLanguage}</h5><br />
+                                    <h5>{moment(video.VideoReleaseDate).format('DD MMM, YYYY')}</h5><br />
+                                    <h5>{video.VideoSource}</h5>
                                 </div>
                             );
                         })
-                    } */}
+                    }
                 </div>
             </div>
         </div>
