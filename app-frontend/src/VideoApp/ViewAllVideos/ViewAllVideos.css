@@ -12,13 +12,30 @@
 .CardsContainer {
     display: flex;
 }
+
 .CardsContainer .Card {
+    background-color: black;
+    color: white;
+    cursor: pointer;
     float: left;
     margin: 1rem;
-    background-color: white;
     height: 45vh;
-    width: 16rem;
+    width: 18rem;
     border-radius: 10px;
-    padding: 0rem 2rem;
+    padding: 0rem 0.5rem;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.CardsContainer :hover {
+    transform: scale(1.05);
+    transition: 200ms linear; 
+}
+.Card :hover {
+    transform: none;
+    transition: none; 
+}
+
+.ReactPlayer {
+    margin: 15px;
+    margin-left: 0;
 }
