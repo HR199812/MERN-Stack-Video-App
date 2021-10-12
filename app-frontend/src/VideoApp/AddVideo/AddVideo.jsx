@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './AddVideo.css';
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
 toast.configure();
@@ -48,7 +49,6 @@ function AddVideo() {
         try {
             axios.post('http://localhost:5001/videos/add', videoData)
                 .then(res => {
-                    console.log(res);
                     toast.success(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
                 })
                 .catch(err => {
