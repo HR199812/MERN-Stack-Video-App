@@ -1,5 +1,5 @@
-import AddVideo from './VideoApp/AddVideo/AddVideo';
-import ViewAllVideos from './VideoApp/ViewAllVideos/ViewAllVideos';
+import AddVideo from './User/AddVideo/AddVideo';
+import ViewAllVideos from './User/ViewAllVideos/ViewAllVideos';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
