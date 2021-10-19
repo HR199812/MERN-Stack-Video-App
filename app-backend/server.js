@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI,
     });
 
 
-const videosRouter = require('./video');
+const videosRouter = require('./routes/video');
 app.use('/videos', videosRouter);
 
 
