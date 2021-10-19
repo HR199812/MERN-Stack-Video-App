@@ -24,21 +24,26 @@ router.post("/register", (req, res) => {
   });
 
   User.findOne({ email: req.body.email }, (err, querres) => {
-    if (querres) res.send({ message: "User Already Exists" });
+    if (querres) res.send({ message: "EmailAlready Exists" });
     else {
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(user.password, salt, (err, hash) => {
-          if (err) console.log(err);
-          user.password = hash;
-          user
-            .save()
-            .then((user) => {
-              res.json("Successfully Registered");
-            })
-            .catch((err) => {
-              res.json("Error adding New Customer");
+      User.findOne({ username: req.body.username }, (err, querres) => {
+        if (querres) res.send({ message: "Username Already Exists" });
+        else {
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+              if (err) console.log(err);
+              user.password = hash;
+              user
+                .save()
+                .then((user) => {
+                  res.json("Successfully Registered");
+                })
+                .catch((err) => {
+                  res.json("Error adding New Customer");
+                });
             });
-        });
+          });
+        }
       });
     }
   });
