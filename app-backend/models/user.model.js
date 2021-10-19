@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = mongoose.Schema;
 
@@ -20,7 +20,7 @@ const userSchema = new schema(
       trim: true,
     },
     phonenumber: {
-      type: Number,
+      type: String,
       require: true,
       trim: true,
     },
@@ -33,5 +33,5 @@ const userSchema = new schema(
   { timestamps: true }
 );
 
-const User = mongoose.Model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;

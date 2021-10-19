@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema;
 
-
 const videosSchema = new schema({
     VideoName: {
         type: String,

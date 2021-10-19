@@ -15,6 +15,8 @@ function Register() {
 
     const history = useHistory();
 
+    const serverString = 'http://localhost:5001/';
+
     const [user, setUser] = useState({
         name: '',
         username: '',
@@ -61,11 +63,20 @@ function Register() {
             toast.error("All the fields are required.", { position: toast.POSITION.BOTTOM_RIGHT });
         }
         else {
-            
-            if(user.password === user.confirmPassword){
-                console.log(user);
+
+            if (user.password === user.confirmPassword) {
+                axios.post(`${serverString}users/register`, user)
+                    .then(res => {
+                        if (res.data.message) {
+                            toast.error(res.data.message, { position: toast.POSITION.BOTTOM_RIGHT });
+                        }
+                        else {
+                            toast.success(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
+                        };
+                    })
+                    .catch(err => console.log(err))
             }
-            else{
+            else {
                 toast.error("Password do not match.", { position: toast.POSITION.BOTTOM_RIGHT });
             }
         }

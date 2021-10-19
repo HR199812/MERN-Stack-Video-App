@@ -1,4 +1,4 @@
-const router = require("express").router;
+const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -14,7 +14,7 @@ router.get("/:emailorusername", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.post("/add", (req, res) => {
+router.post("/register", (req, res) => {
   var user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -23,20 +23,25 @@ router.post("/add", (req, res) => {
     password: req.body.password,
   });
 
-  User.findOne({ email: req.body.email }, (err, res) => {
-    if (res) res.send({ message: "User Name Already Exists" });
+  User.findOne({ email: req.body.email }, (err, querres) => {
+    if (querres) res.send({ message: "User Already Exists" });
     else {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(user.password, salt, (err, hash) => {
           if (err) console.log(err);
           user.password = hash;
-          user.save().then(user=>{
-            res.status(200).json('New Customer added successfully');
-          }).catch(err=>{
-            res.status(400).json('Error adding New Customer');
-          })
+          user
+            .save()
+            .then((user) => {
+              res.json("Successfully Registered");
+            })
+            .catch((err) => {
+              res.json("Error adding New Customer");
+            });
         });
       });
     }
   });
 });
+
+module.exports = router;
