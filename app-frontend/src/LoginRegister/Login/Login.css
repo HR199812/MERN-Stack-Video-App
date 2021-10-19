@@ -1,4 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.LoginRegisterContainer {
+    background-image: url('../LoginRegisterBackground.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
 .login-page {
     width: 460px;
     padding: 8% 0 0;
@@ -17,6 +25,13 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+#countrycodeselect{
+    width: 19%;
+}
+#countrycodeinput{
+    margin-left: 5%;
+    width: 74%;
+}
 .form input, .form select, .form textarea {
     font-family: "Roboto", sans-serif;
     outline: 0;
@@ -62,7 +77,8 @@
 }
 
 .form button:hover, .form button:active, .form button:focus {
-    background: linear-gradient(45deg, #04b121ab, #01b144);;
+    background: linear-gradient(45deg, #04b121ab, #01b144);
+    ;
 }
 
 .form .message {
@@ -74,7 +90,7 @@
 .form .message span {
     font-weight: 600;
     font-size: 14px;
-    color: #4807fc;
+    color: #018f37;
     text-decoration: none;
     cursor: pointer;
 }

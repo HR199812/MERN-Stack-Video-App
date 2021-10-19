@@ -88,22 +88,24 @@ function Login() {
 
     return (
         <>
-            <div className="login-page" >
-                <div className="form" >
-                    <form className="login-form">
+            <div className="LoginRegisterContainer">
+                <div className="login-page" >
+                    <div className="form" >
+                        <form className="login-form">
 
-                        <input name="username" type="text" placeholder="username"
-                            onChange={UpdateLoginFields}
-                            value={userLogin.username} />
+                            <input name="username" type="text" placeholder="username"
+                                onChange={UpdateLoginFields}
+                                value={userLogin.username} />
 
-                        <input name="userpass" type="password" placeholder="password"
-                            onChange={UpdateLoginFields}
-                            value={userLogin.userpass} />
+                            <input name="userpass" type="password" placeholder="password"
+                                onChange={UpdateLoginFields}
+                                value={userLogin.userpass} />
 
-                        <button onClick={LoginUser}>login</button>
-                        <p className="message"><span onClick={showForgotPassswordPage}>Forgot Password?</span></p>
-                        <p className="message">Not registered? <span onClick={showRegistrationPage}>Create an account</span></p>
-                    </form>
+                            <button onClick={LoginUser}>login</button>
+                            <p className="message"><span onClick={showForgotPassswordPage}>Forgot Password?</span></p>
+                            <p className="message">Not registered? <span onClick={showRegistrationPage}>Create an account</span></p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </>
