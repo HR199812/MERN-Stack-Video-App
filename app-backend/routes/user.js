@@ -41,30 +41,40 @@ router.post("/register", (req, res) => {
     password: req.body.password,
   });
 
-  User.findOne({ email: req.body.email }, (err, querres) => {
-    if (querres) res.send({ message: "EmailAlready Exists" });
-    else {
-      User.findOne({ username: req.body.username }, (err, querres) => {
-        if (querres) res.send({ message: "Username Already Exists" });
-        else {
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(user.password, salt, (err, hash) => {
-              if (err) console.log(err);
-              user.password = hash;
-              user
-                .save()
-                .then((user) => {
-                  res.json("Successfully Registered");
-                })
-                .catch((err) => {
-                  res.json("Error adding New Customer");
-                });
-            });
+  User.findOne(
+    {
+      $or: [
+        {
+          email: req.body.email,
+        },
+        {
+          username: req.body.username,
+        },
+      ],
+    },
+    (err, querres) => {
+      if (querres.username === req.body.username) {
+        res.send({ message: "User Name already exists" });
+      } else if (querres.email === req.body.email) {
+        res.send({ message: "Email already exists" });
+      } else {
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(user.password, salt, (err, hash) => {
+            if (err) console.log(err);
+            user.password = hash;
+            user
+              .save()
+              .then((user) => {
+                res.json("Successfully Registered");
+              })
+              .catch((err) => {
+                res.json("Error adding New Customer");
+              });
           });
-        }
-      });
+        });
+      }
     }
-  });
+  );
 });
 
 module.exports = router;

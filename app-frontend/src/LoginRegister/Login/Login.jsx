@@ -25,7 +25,7 @@ function Login() {
         history.push('/register');
     }
     const showForgotPassswordPage = () => {
-        // history.push('/sendOTP');
+        history.push('/sendotp');
     }
 
     // Function to set value of username and password

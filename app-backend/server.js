@@ -27,9 +27,11 @@ mongoose
 
 const videosRouter = require("./routes/video");
 const userRouter = require("./routes/user");
+const resetPasswordRouter = require("./routes/resetpassword");
 
 app.use("/videos", videosRouter);
 app.use("/users", userRouter);
+app.use("/resetpass", resetPasswordRouter);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
