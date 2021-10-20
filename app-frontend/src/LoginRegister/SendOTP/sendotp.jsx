@@ -1,15 +1,20 @@
-import {useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-function sendotp() {
+function SendOTP() {
 
     const history = useHistory();
 
     const [email, setEmail] = useState('');
 
+    const SetEmailValue = (e) => {
+
+        setEmail(e.target.value);
+    }
+    
     const CheckEmail = (e) => {
 
         e.preventDefault();
-        
+        alert(email);
     }
     return (
         <>
@@ -18,7 +23,7 @@ function sendotp() {
                     <div className="form" >
                         <form className="login-form">
 
-                            <input name="email" type="text" placeholder="Enter E-Mail" />
+                            <input name="email" type="text" name="email" value={email} onChange={SetEmailValue} placeholder="Enter E-Mail" />
 
                             <button onClick={CheckEmail}>Send OTP</button>
                         </form>
@@ -29,4 +34,4 @@ function sendotp() {
     )
 }
 
-export default sendotp;
+export default SendOTP;
