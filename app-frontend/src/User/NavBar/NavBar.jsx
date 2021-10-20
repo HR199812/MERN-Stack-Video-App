@@ -10,10 +10,14 @@ function NavBar() {
     const history = useHistory();
 
     const ShowAllVideos = () => {
-        history.push('/');
+        history.push('/user/all-videos');
     }
     const ShowAddNew = () => {
-        history.push('/add-new');
+        history.push('/user/add-new');
+    }
+    const Logout = () => {
+        localStorage.clear();
+        history.push('/');
     }
 
     return (
@@ -22,6 +26,7 @@ function NavBar() {
             <ul>
                 <li><span className="viedoAppSpan" onClick={ShowAllVideos}>Show All</span></li>
                 <li><span className="viedoAppSpan" onClick={ShowAddNew}>Add New</span></li>
+                <li><span className="viedoAppSpan" onClick={Logout}>Logout</span></li>
             </ul>
         </nav>
     );

@@ -73,9 +73,9 @@ function Login() {
 
                             toast.success('Login Successful', { position: toast.POSITION.BOTTOM_RIGHT });
 
-                            // history.push({
-                            //     pathname: `/customer/home`
-                            // });
+                            history.push({
+                                pathname: `/user/all-videos`
+                            });
 
                         }
                         else {
