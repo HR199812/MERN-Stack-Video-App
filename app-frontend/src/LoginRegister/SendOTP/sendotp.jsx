@@ -1,20 +1,44 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
+
 function SendOTP() {
 
     const history = useHistory();
 
     const [email, setEmail] = useState('');
 
+    const serverString = 'http://localhost:5001/';
+
     const SetEmailValue = (e) => {
 
         setEmail(e.target.value);
     }
-    
+
     const CheckEmail = (e) => {
 
         e.preventDefault();
-        alert(email);
+
+        try {
+            axios.post(`${serverString}resetpass/sendotp`, {email}).then(res => {
+                console.log(res);
+                if(res.data.message){
+                    toast.error(res.data.message, { position: toast.POSITION.BOTTOM_RIGHT });
+                }
+                else{
+                    history.push('/resetpassword');
+                    toast.success(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
+                }
+            }).catch(err => {
+
+            });
+        } catch (err) {
+
+        }
     }
     return (
         <>
