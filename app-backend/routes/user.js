@@ -8,9 +8,27 @@ router.get("/", (req, res) => {
     .then((res) => res.status(200).json(res))
     .catch((err) => res.status(400).json(err));
 });
-router.get("/:emailorusername", (req, res) => {
-  User.findOne({ email: req.params.userid })
-    .then((res) => res.status(200).json(res))
+router.post("/login", (req, res) => {
+  User.findOne({ email: req.body.email })
+    .then((user) => {
+      if (user) {
+        bcrypt.compare(req.body.password, user.password).then((isMatch) => {
+          if (!isMatch) return res.json("Invalid Credentials");
+          jwt.sign({ id: user._id }, process.env.jwtSecret, (err, token) => {
+            if (err) throw err;
+            res.json({
+              token,
+              user: {
+                id: user._id,
+                username: user.name,
+              },
+            });
+          });
+        });
+      } else {
+        res.json("User Does not exist");
+      }
+    })
     .catch((err) => res.status(400).json(err));
 });
 

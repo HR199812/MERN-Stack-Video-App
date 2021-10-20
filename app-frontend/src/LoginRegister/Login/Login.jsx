@@ -11,7 +11,7 @@ function Login() {
 
     const history = useHistory();
 
-    const serverString = 'http://localhost:5000/';
+    const serverString = 'http://localhost:5001/';
 
     const [userLogin, setUserLogin] = useState(
         {
@@ -48,43 +48,43 @@ function Login() {
 
 
     let LoginUser = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
 
         if (userLogin.username === '' || userLogin.userpass === '') {
             toast.error('Both The Fields are required', { position: toast.POSITION.BOTTOM_RIGHT });
         }
         else {
-            const user = { CustomerUserName: userLogin.username, CustomerPassword: userLogin.userpass };
+            const user = { email: userLogin.username, password: userLogin.userpass };
 
             console.log(user);
-            // try {
-            //     axios.post(`${serverString}Customer/login`, user)
-            //         .then(res => {
-            //             console.log(res);
-            //             if (res.data !== 'Invalid Credentials') {
-            //                 console.log(res.data);
+            try {
+                axios.post(`${serverString}users/login`, user)
+                    .then(res => {
+                        console.log(res);
+                        if (res.data !== 'Invalid Credentials') {
+                            console.log(res.data);
 
-            //                 const CustomerIdKey = 'CustomerId';
-            //                 const UserNameKey = 'CustomerName';
-            //                 const CustomerToken = 'CustomerToken';
-            //                 localStorage.setItem(CustomerIdKey, res.data.customer.id);
-            //                 localStorage.setItem(UserNameKey, res.data.customer.CustomerFullName);
-            //                 localStorage.setItem(CustomerToken, res.data.token);
+                            const userIdKey = 'UserId';
+                            const UserNameKey = 'UserName';
+                            const userToken = 'UserToken';
+                            localStorage.setItem(userIdKey, res.data.user.id);
+                            localStorage.setItem(UserNameKey, res.data.user.username);
+                            localStorage.setItem(userToken, res.data.token);
 
-            //                 toast.success('Login Successful', { position: toast.POSITION.BOTTOM_RIGHT });
+                            toast.success('Login Successful', { position: toast.POSITION.BOTTOM_RIGHT });
 
-            //                 history.push({
-            //                     pathname: `/customer/home`
-            //                 });
+                            // history.push({
+                            //     pathname: `/customer/home`
+                            // });
 
-            //             }
-            //             else {
-            //                 toast.error(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
-            //             }
-            //         }).catch(error => toast.error(`${error}`, { position: toast.POSITION.BOTTOM_RIGHT }));
-            // } catch (err) {
-            //     toast.error(err, { position: toast.POSITION.BOTTOM_RIGHT })
-            // }
+                        }
+                        else {
+                            toast.error(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
+                        }
+                    }).catch(error => toast.error(`${error}`, { position: toast.POSITION.BOTTOM_RIGHT }));
+            } catch (err) {
+                toast.error(err, { position: toast.POSITION.BOTTOM_RIGHT })
+            }
         }
     }
 
