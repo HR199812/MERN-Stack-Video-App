@@ -18,6 +18,7 @@ router.get("/getOTP", (req, res) => {
         },
       ],
     }).then((otp) => {
+      console.log(otp[0].email);
       const currTime = new Date().getTime();
       const otpTime = otp[0].expireIn;
       const timeDiff = otpTime - currTime;
@@ -26,6 +27,7 @@ router.get("/getOTP", (req, res) => {
         flag = false;
         User.findOne({ email: otp[0].email })
           .then((user) => {
+            console.log(user);
             user.name = user.name;
             user.email = user.email;
             user.phonenumber = user.phonenumber;
@@ -34,9 +36,10 @@ router.get("/getOTP", (req, res) => {
 
             //Create Salt and Hash
             bcrypt.genSalt(10, (err, salt) => {
-              bcrypt.hash(user.userPassword, salt, (err, hash) => {
+              bcrypt.hash(user.password, salt, (err, hash) => {
                 if (err) console.log(err);
-                user.userPassword = hash;
+
+                user.password = hash;
 
                 user
                   .save()
