@@ -19,7 +19,7 @@ router.get("/getOTP", (req, res) => {
       ],
     }).then((otp) => {
       const currTime = new Date().getTime();
-      const otpTime = otp[0].ExpireIn;
+      const otpTime = otp[0].expireIn;
       const timeDiff = otpTime - currTime;
 
       if (timeDiff > 0) {
@@ -63,15 +63,14 @@ router.post("/sendotp", (req, res) => {
     if (user) {
       let otpCode = Math.floor(Math.random() * 1000000 + 1);
       let otpData = new OTP({
-        Email: user.email,
-        Code: otpCode,
-        ExpireIn: new Date().getTime() + 300 * 1000,
+        email: user.email,
+        code: otpCode,
+        expireIn: new Date().getTime() + 300 * 1000,
       });
 
       otpData
         .save()
         .then((data) => {
-          console.log("Check");
           sendMail(otpData);
           res.status(200).json("OTP send to Mail! Please Check your E-Mail");
         })
@@ -85,7 +84,6 @@ router.post("/sendotp", (req, res) => {
 });
 
 const sendMail = async (mailData) => {
-  console.log(mailData);
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   let testAccount = await nodemailer.createTestAccount();
@@ -108,10 +106,10 @@ const sendMail = async (mailData) => {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: "hritwik72@gmail.com", // sender address
-    to: `${mailData.Email}`, // list of receivers
+    to: `${mailData.email}`, // list of receivers
     subject: "Reset Password", // Subject line
-    text: `Hi ${mailData.Email},
-        \nYour OTP to reset your password is: ${mailData.Code}.\n
+    text: `Hi ${mailData.email},
+        \nYour OTP to reset your password is: ${mailData.code}.\n
         Expiring in: 5 mins`, // plain text body
     html: "<b>Hello world?</b>", // html body
   });
