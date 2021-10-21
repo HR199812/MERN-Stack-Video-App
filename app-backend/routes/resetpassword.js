@@ -4,6 +4,60 @@ const User = require("../models/user.model");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 
+router.get("/getOTP", (req, res) => {
+  try {
+    console.log(req.headers.otp);
+
+    const dataOfOTP = OTP.find({
+      $and: [
+        {
+          email: req.headers.email,
+        },
+        {
+          code: req.headers.otp,
+        },
+      ],
+    }).then((otp) => {
+      const currTime = new Date().getTime();
+      const otpTime = otp[0].ExpireIn;
+      const timeDiff = otpTime - currTime;
+
+      if (timeDiff > 0) {
+        flag = false;
+        User.findOne({ email: otp[0].email })
+          .then((user) => {
+            user.name = user.name;
+            user.email = user.email;
+            user.phonenumber = user.phonenumber;
+            user.password = req.headers.password;
+            user.username = user.username;
+
+            //Create Salt and Hash
+            bcrypt.genSalt(10, (err, salt) => {
+              bcrypt.hash(user.userPassword, salt, (err, hash) => {
+                if (err) console.log(err);
+                user.userPassword = hash;
+
+                user
+                  .save()
+                  .then(() => res.json("Password Updated Succesfully!"))
+                  .catch((err) => res.status(400).json("Error: " + err));
+              });
+            });
+          })
+          .catch((err) => {
+            res.status(400).json(err);
+          });
+      } else {
+        console.log("hi");
+        res.json("OTP Expired");
+      }
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.post("/sendotp", (req, res) => {
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
