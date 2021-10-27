@@ -4,6 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import UserFooter from '../UserFooter/UserFooter';
 
 toast.configure();
 
@@ -61,36 +62,39 @@ function AddVideo() {
 
     }
     return (
-        <div>
-            <NavBar />
-            <div className='AddVideoContainer'>
-                <div className='AddVideoForm'>
-                    <div>
-                        <p>Trailer Name:</p>
-                        <input value={fieldValue.videoName} name="videoName" type="text" placeholder="video name" onChange={ChangeEvent} />
-                    </div>
-                    <div>
-                        <p>Year of Release:</p>
-                        <input type="date" value={fieldValue.videoReleaseData} name="videoReleaseData" onChange={ChangeEvent} />
-                    </div>
-                    <div>
-                        <p>Language:</p>
-                        <input type="text" placeholder="video language" value={fieldValue.videoLanguage} name="videoLanguage" onChange={ChangeEvent} />
-                    </div>
-                    <div>
-                        <p>Source:</p>
-                        <input type="text" placeholder="video source" value={fieldValue.videoSource} name="videoSource" onChange={ChangeEvent} />
-                    </div>
-                    <div>
-                        <p>Add Trailer URL:</p>
-                        <textarea value={fieldValue.videoVideoURL} name="videoVideoURL" onChange={ChangeEvent} />
-                    </div>
-                    <div className='ButtonDiv'>
-                        <button onClick={AddVideo}>Add</button>
+        <>
+            <div>
+                <NavBar />
+                <div className='AddVideoContainer'>
+                    <div className='AddVideoForm'>
+                        <div>
+                            <p>Trailer Name:</p>
+                            <input value={fieldValue.videoName} name="videoName" type="text" placeholder="video name" onChange={ChangeEvent} />
+                        </div>
+                        <div>
+                            <p>Year of Release:</p>
+                            <input type="date" value={fieldValue.videoReleaseData} name="videoReleaseData" onChange={ChangeEvent} />
+                        </div>
+                        <div>
+                            <p>Language:</p>
+                            <input type="text" placeholder="video language" value={fieldValue.videoLanguage} name="videoLanguage" onChange={ChangeEvent} />
+                        </div>
+                        <div>
+                            <p>Source:</p>
+                            <input type="text" placeholder="video source" value={fieldValue.videoSource} name="videoSource" onChange={ChangeEvent} />
+                        </div>
+                        <div>
+                            <p>Add Trailer URL:</p>
+                            <textarea value={fieldValue.videoVideoURL} name="videoVideoURL" onChange={ChangeEvent} />
+                        </div>
+                        <div className='ButtonDiv'>
+                            <button onClick={AddVideo}>Add</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <UserFooter />
+        </>
     );
 }
 

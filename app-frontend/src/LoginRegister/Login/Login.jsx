@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import './Login.css';
 import 'react-toastify/dist/ReactToastify.css';
+import AppFooter from '../AppHomeFooter/AppHomeFooter';
 
 toast.configure();
 
@@ -110,6 +111,7 @@ function Login() {
                     </div>
                 </div>
             </div>
+            <AppFooter />
         </>
 
     );

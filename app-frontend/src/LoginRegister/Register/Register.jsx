@@ -8,6 +8,8 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import parsePhoneNumber from 'libphonenumber-js'
 import { isValidPhoneNumber } from 'react-phone-number-input';
+import AppFooter from '../AppHomeFooter/AppHomeFooter';
+
 
 toast.configure();
 
@@ -120,6 +122,7 @@ function Register() {
                     </div>
                 </div>
             </div>
+            <AppFooter/>
         </>
     )
 }

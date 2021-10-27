@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AppFooter from '../AppHomeFooter/AppHomeFooter';
 
 toast.configure();
 
@@ -24,12 +25,12 @@ function SendOTP() {
         e.preventDefault();
 
         try {
-            axios.post(`${serverString}resetpass/sendotp`, {email}).then(res => {
+            axios.post(`${serverString}resetpass/sendotp`, { email }).then(res => {
                 console.log(res);
-                if(res.data.message){
+                if (res.data.message) {
                     toast.error(res.data.message, { position: toast.POSITION.BOTTOM_RIGHT });
                 }
-                else{
+                else {
                     history.push('/resetpassword');
                     toast.success(res.data, { position: toast.POSITION.BOTTOM_RIGHT });
                 }
@@ -54,6 +55,7 @@ function SendOTP() {
                     </div>
                 </div>
             </div>
+            <AppFooter />
         </>
     )
 }

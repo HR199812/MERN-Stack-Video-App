@@ -4,6 +4,7 @@ import './ViewAllVideos.css';
 import axios from 'axios';
 import moment from 'moment';
 import ReactPlayer from "react-player"
+import UserFooter from '../UserFooter/UserFooter';
 
 function ViewAllVideos() {
     const [videosArr, SetVideosArr] = useState([]);
@@ -30,31 +31,34 @@ function ViewAllVideos() {
     }
 
     return (
-        <div>
-            <NavBar />
-            <div className='ViewAllVideosContainer'>
-                <div className='CardsContainer'>
-                    {
+        <>
+            <div>
+                <NavBar />
+                <div className='ViewAllVideosContainer'>
+                    <div className='CardsContainer'>
+                        {
 
-                        videosArr.map((video, index) => {
-                            return (
-                                <div className='Card' onClick={() => ShowModel(video.VideoVideoURL)}>
+                            videosArr.map((video, index) => {
+                                return (
+                                    <div className='Card' onClick={() => ShowModel(video.VideoVideoURL)}>
 
-                                    <ReactPlayer width="100%"
-                                        height="50%"
-                                        url={video.VideoVideoURL}
-                                    /><br />
-                                    <h4>{video.VideoName}</h4><br />
-                                    <h5>{video.VideoLanguage}</h5><br />
-                                    <h5>{moment(video.VideoReleaseDate).format('DD MMM, YYYY')}</h5><br />
-                                    <h5>{video.VideoSource}</h5>
-                                </div>
-                            );
-                        })
-                    }
+                                        <ReactPlayer width="100%"
+                                            height="50%"
+                                            url={video.VideoVideoURL}
+                                        /><br />
+                                        <h4>{video.VideoName}</h4><br />
+                                        <h5>{video.VideoLanguage}</h5><br />
+                                        <h5>{moment(video.VideoReleaseDate).format('DD MMM, YYYY')}</h5><br />
+                                        <h5>{video.VideoSource}</h5>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
+            <UserFooter />
+        </>
     );
 }
 
